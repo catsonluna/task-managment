@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "argon2": "^0.31.2",
+    "axios": "^1.6.1",
+    "mysql2": "^3.6.3",
     "next": "14.0.1",
     "react": "^18",
     "react-dom": "^18",
