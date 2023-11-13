@@ -10,7 +10,7 @@ function Header(){
             <div className={`${style.main}`}>
                 <div className={`${style.header}`}>
                     <a className={`${style.res}`} href="/">Home</a>
-                    <a className={`${style.res}`} href="/create">Make task</a>
+                    <a className={`${style.res}`} href="/create">Make a task</a>
                     <a className={`${style.res}`} href="/login">Login/Signup</a>
                 </div>
             </div>
