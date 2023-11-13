@@ -1,0 +1,22 @@
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    background-color: #C0C0C0;
+}
+.header{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    width: 50%;
+    background-color: #817f7f;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+.res{
+    color: #55A6F1;
+    font-weight: bold;
+    font-size: 32px;
+}
