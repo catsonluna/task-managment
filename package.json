@@ -9,11 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "mysql2": "^3.6.3",
     "next": "14.0.1",
     "react": "^18",
+    "react-calendar": "^4.6.1",
     "react-dom": "^18",
-    "react-modal": "^3.16.1",
-    "mysql2": "^3.6.3"
+    "react-modal": "^3.16.1"
   },
   "devDependencies": {
     "@types/node": "^20",
