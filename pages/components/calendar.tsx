@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Calendar from 'react-calendar';
+import dynamic from 'next/dynamic';
 import 'react-calendar/dist/Calendar.css';
 import styles from '@/styles/cal.module.css'
+
+const DynamicCalendar = dynamic(
+  () => import('react-calendar'),
+  { ssr: false }
+)
 
 function Cal() {
   const [date, setDate] = useState(null);
@@ -20,7 +25,7 @@ function Cal() {
 
   return (
     <div>
-      <Calendar className={styles.reactCalendar} value={date} />
+      <DynamicCalendar className={styles.reactCalendar} value={date} />
     </div>
   );
 }

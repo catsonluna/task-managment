@@ -87,7 +87,42 @@ body {
   background-color: #e1d9d1;
   font-family: 'Kanit', sans-serif;
 }
-
+.react-calendar{
+  width: 70% !important;
+  height: 50vh;
+}
+.react-calendar__viewContainer{
+  display: flex;
+  height: 90%;
+  justify-content: center;
+}
+.react-calendar__month-view{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+.react-calendar__month-view__days__day {
+  color: black;
+}
+.react-calendar__month-view__days__day--weekend {
+  color: #d10000;
+}
+.react-calendar__navigation__label{
+  color: black;
+}
+.react-calendar__navigation__arrow.react-calendar__navigation__prev-button{
+  color: black;
+}
+.react-calendar__navigation__arrow.react-calendar__navigation__prev2-button{
+  color: black;
+}
+.react-calendar__navigation__arrow.react-calendar__navigation__next-button{
+  color: black;
+}
+.react-calendar__navigation__arrow.react-calendar__navigation__next2-button{
+  color: black;
+}
 body {
   color: rgb(var(--foreground-rgb));
 }

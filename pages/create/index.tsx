@@ -1,3 +1,4 @@
+import React, { useState, useRef, useEffect } from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
@@ -8,6 +9,37 @@ import Cal from '../components/calendar'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [text, setText] = useState('');
+  const [rows, setRows] = useState(1);
+  const maxRows = 10;
+  const textAreaRef = useRef(null);
+
+  const handleChange = (event) => {
+    const textareaLineHeight = 24;
+    const previousRows = event.target.rows;
+    event.target.rows = 1;
+    const currentRows = ~~(event.target.scrollHeight / textareaLineHeight);
+
+    if (currentRows === previousRows) {
+      event.target.rows = currentRows;
+    }
+
+    if (currentRows >= maxRows) {
+      event.target.rows = maxRows;
+      event.target.scrollTop = event.target.scrollHeight;
+    }
+
+    setText(event.target.value);
+    setRows(currentRows < maxRows ? currentRows : maxRows);
+  };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: textAreaRef.current.offsetTop,
+      behavior: "smooth"
+    });
+  }, [rows]);
+
   return (
     <>
       <Head>
@@ -19,16 +51,15 @@ export default function Home() {
       <main className={`${styles.main}`}>
         <Header />
         <div className={styles.description}>
-            <form>
-                <div>{/*date*/}
-                    <div>
+            <form className={`${styles.form}`}>
+                <div className={`${styles.fix}`}>{/*date*/}
+                    <div className={`${styles.calc}`}>
                         <Cal />
                     </div>
                 </div>
-                <div>{/*viss parejais*/}
-                    <div>
-
-                    </div>
+                <div className={`${styles.formatting}`}>{/*viss parejais*/}
+                    <input type="text" className={`${styles.input}`} placeholder="Enter text here" />
+                    <textarea ref={textAreaRef} rows={rows} cols="30" className={`${styles.input}`} placeholder="Enter text here" onChange={handleChange}></textarea>
                 </div>
             </form>
         </div>
