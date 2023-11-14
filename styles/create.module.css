@@ -5,3 +5,44 @@
     height: 100vh;
 
 }
+.calc{
+    display: flex;
+    width: 90%;
+    height: 70vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-right: 20px;
+}
+.formatting{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 80px;
+    padding: 10px;
+    margin-top: 80px;
+}
+.input{
+    display: flex;
+    background-color: white;
+    border: none;
+    width: 80%;
+    height: 10%;
+    align-items: center;
+    justify-content: center;
+    color: #55A6F1;
+    border-radius: 15px;
+    text-align: center;
+}
+.input::placeholder{
+    color: #55A6F1;
+}
+.form{
+    display: flex;
+    flex-direction: row;
+}
+.fix{
+    width: 50%;
+}
