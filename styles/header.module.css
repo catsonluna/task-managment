@@ -12,7 +12,8 @@
     flex-direction: row;
     gap: 50px;
     width: 100%;
-    background: linear-gradient(rgb(78, 116, 78), rgb(113, 150, 113));
+    background: linear-gradient(#58d558, #8ce28c);
+
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     padding: 10px;
