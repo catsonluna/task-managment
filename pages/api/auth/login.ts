@@ -1,10 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import type { SessionToken } from '@/pages/api/types'
-import { connection } from '@/lib/database';
 import { checkEmail, shaHash } from '@/lib/utils';
-import { verifyPassword, generateSecret } from '@/lib/utils';
-export default function handler(
+import { verifyPassword, generateSecret, getPrisma } from '@/lib/utils';
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<SessionToken>
 ) {
@@ -28,69 +27,67 @@ export default function handler(
         });
     }
 
-    connection.query(
-        `SELECT * FROM users WHERE username = ? or email = ?`,
-        [username, username],
-        (error, results, fields) => {
-            if (error) {
-                return res.status(500).json({
-                    success: {
-                        success: false,
-                        cause: "internal_server_error"
-                    },
-                });
-            }
-
-            if (results.length === 0) {
-                return res.status(401).json({
-                    success: {
-                        success: false,
-                        cause: "invalid_credentials"
-                    },
-                });
-            }
-
-            const user = results[0];
-
-            if (!verifyPassword(password, user.password)) {
-                return res.status(401).json({
-                    success: {
-                        success: false,
-                        cause: "invalid_credentials"
-                    },
-                });
-            }
-
-            const session_id = generateSecret(32);
-            const session_token = generateSecret(32);
-            const session_hash = shaHash(session_token);
-            
-            connection.query(
-                `INSERT INTO sessions (user_id, session_id, session_hash) VALUES (?, ?, ?)`,
-                [user.id, session_id, session_hash],
-                (error, results, fields) => {
-                    if (error) {
-                        return res.status(500).json({
-                            success: {
-                                success: false,
-                                cause: "internal_server_error"
-                            },
-                        });
-                    }
-
-                    return res.status(200).json({
-                        success: {
-                            success: true,
-                        },
-                        data: {
-                            token: session_token,
-                        }
-                    });
-                }
-            );
-        }
-    );
-
-
+    const prisma = getPrisma();
     
+    let user = await prisma.user.findUnique({
+        where: {
+            username: username
+        }
+    });
+
+    if (!user) {
+        user = await prisma.user.findUnique({
+            where: {
+                email: username
+            }
+        });
+    }
+
+    if (!user) {
+        return res.status(401).json({
+            success: {
+                success: false,
+                cause: "invalid_credentials"
+            },
+        });
+    }
+
+    const passwordMatch = await verifyPassword(password, user.password);
+
+    if (!passwordMatch) {
+        return res.status(401).json({
+            success: {
+                success: false,
+                cause: "invalid_password"
+            },
+        });
+    }
+
+
+    const sessionToken = generateSecret(64);
+    const sessionHash = shaHash(sessionToken);
+
+    await prisma.session.create({
+        data: {
+            session_hash: sessionHash,
+            user_id: user.user_id,
+            expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+        },
+    }).then((session) => {
+        res.status(200).json({
+            success: {
+                success: true,
+            },
+            data:{
+                token: sessionToken,
+            },
+        });
+    }).catch((error) => {
+        res.status(500).json({
+            success: {
+                success: false,
+                cause: "internal_server_error"
+            },
+        });
+    });
 }

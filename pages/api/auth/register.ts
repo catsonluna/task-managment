@@ -1,10 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import type { SessionToken } from '@/pages/api/types'
-import { connection } from '@/lib/database';
-import { checkEmail, checkUsername, shaHash } from '@/lib/utils';
-import { hashPassword, generateSecret } from '@/lib/utils';
-export default function handler(
+import { checkEmail, checkUsername, emailTaken, shaHash, usernameTaken } from '@/lib/utils';
+import { hashPassword, generateSecret, getPrisma } from '@/lib/utils';
+
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<SessionToken>
 ) {
@@ -69,70 +69,60 @@ export default function handler(
                 },
             });
         }
+        
+        if(await usernameTaken(username)){
+            return res.status(400).json({
+                success: {
+                    success: false,
+                    cause: "username_taken"
+                },
+            });
+        }
 
-        connection.query(
-            "SELECT * FROM users WHERE username = ? OR email = ?",
-            [username, email],
-            (err, results) => {
-                if (err) {
-                    return res.status(500).json({
-                        success: {
-                            success: false,
-                            cause: "internal_server_error"
-                        },
-                    });
-                }
-                //@ts-ignore
-                if (results.length > 0) {
-                    return res.status(400).json({
-                        success: {
-                            success: false,
-                            cause: "user_already_exists"
-                        },
-                    });
-                }
-                const user_id = generateSecret(32);
-                connection.query(
-                    "INSERT INTO users (user_id, username, email, password) VALUES (?, ?, ?, ?)",
-                    [user_id, username, email, hashPassword(password)],
-                    (err, results) => {
-                        if (err) {
-                            return res.status(500).json({
-                                success: {
-                                    success: false,
-                                    cause: "internal_server_error"
-                                },
-                            });
-                        }
-                        const session_id = generateSecret(32);
-                        const session_token = generateSecret(32);
-                        const session_hash = shaHash(session_token);
-                        connection.query(
-                            "INSERT INTO sessions (session_id, session_hash, user_id) VALUES (?, ?, ?)",
-                            [session_id, session_hash, user_id],
-                            (err, results) => {
-                                if (err) {
-                                    return res.status(500).json({
-                                        success: {
-                                            success: false,
-                                            cause: "internal_server_error"
-                                        },
-                                    });
-                                }
-                                return res.status(200).json({
-                                    success: {
-                                        success: true,
-                                        cause: ""
-                                    },
-                                    data:
-                                    {
-                                        token: session_token
-                                    }
-                                });
-                            }
-                        )
-                    }
-                )
-            }
-        )
+        if (await emailTaken(email)) {
+            return res.status(400).json({
+                success: {
+                    success: false,
+                    cause: "email_taken"
+                },
+            });
+        }
+
+        const hashedPassword = await hashPassword(password)
+        
+        const prisma = getPrisma();
+        const user = await prisma.user.create({
+            data: {
+                username: username,
+                email: email,
+                password: hashedPassword,
+            },
+        });
+
+        const sessionToken = generateSecret(64);
+        const sessionHash = shaHash(sessionToken);
+
+        await prisma.session.create({
+            data: {
+                session_hash: sessionHash,
+                user_id: user.user_id,
+                expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+            },
+        }).then((session) => {
+            res.status(200).json({
+                success: {
+                    success: true,
+                },
+                data:{
+                    token: sessionToken,
+                },
+            });
+        }).catch((error) => {
+            res.status(500).json({
+                success: {
+                    success: false,
+                    cause: "internal_server_error"
+                },
+            });
+        });
 }

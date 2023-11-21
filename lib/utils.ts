@@ -1,4 +1,18 @@
 import * as argon2 from "argon2";
+import { PrismaClient } from "@prisma/client";
+
+let prisma: PrismaClient;
+
+function connect() {
+    if (typeof prisma === "undefined") {
+        prisma = new PrismaClient();
+    }
+    return prisma;
+}
+
+export function getPrisma() {
+    return connect();
+}
 
 export function dateFormat(date: string) {
     const dateObj = new Date(date);
@@ -50,4 +64,22 @@ export function generateSecret(len: number) {
         secret += charset.charAt(Math.floor(Math.random() * charset.length));
     }
     return secret;
+}
+
+export async function usernameTaken(username: string){
+    const user = await prisma.user.findUnique({
+        where: {
+            username: username
+        }
+    });
+    return user !== null;
+}
+
+export async function emailTaken(email: string){
+    const user = await prisma.user.findUnique({
+        where: {
+            email: email
+        }
+    });
+    return user !== null;
 }

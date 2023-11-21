@@ -1,5 +1,4 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { connection } from '@/lib/database';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Success } from '../types';
 import { shaHash } from '@/lib/utils';
