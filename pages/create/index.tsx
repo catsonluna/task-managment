@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
@@ -9,36 +9,10 @@ import Cal from '../components/calendar'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const [text, setText] = useState('');
-  const [rows, setRows] = useState(1);
-  const maxRows = 10;
-  const textAreaRef = useRef(null);
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-  const handleChange = (event) => {
-    const textareaLineHeight = 24;
-    const previousRows = event.target.rows;
-    event.target.rows = 1;
-    const currentRows = ~~(event.target.scrollHeight / textareaLineHeight);
-
-    if (currentRows === previousRows) {
-      event.target.rows = currentRows;
-    }
-
-    if (currentRows >= maxRows) {
-      event.target.rows = maxRows;
-      event.target.scrollTop = event.target.scrollHeight;
-    }
-
-    setText(event.target.value);
-    setRows(currentRows < maxRows ? currentRows : maxRows);
-  };
-
-  useEffect(() => {
-    window.scrollTo({
-      top: textAreaRef.current.offsetTop,
-      behavior: "smooth"
-    });
-  }, [rows]);
+};
 
   return (
     <>
@@ -51,19 +25,29 @@ export default function Home() {
       <main className={`${styles.main}`}>
         <Header />
         <div className={styles.description}>
-            <form className={`${styles.form}`}>
+            <form className={`${styles.form}`} onSubmit={handleSubmit}>
+              <div className={`${styles.row}`}>
                 <div className={`${styles.fix}`}>{/*date*/}
                     <div className={`${styles.calc}`}>
                         <Cal />
                     </div>
                 </div>
                 <div className={`${styles.formatting}`}>{/*viss parejais*/}
-                    <input type="text" className={`${styles.input}`} placeholder="Enter text here" />
-                    <textarea ref={textAreaRef} rows={rows} cols="30" className={`${styles.input}`} placeholder="Enter text here" onChange={handleChange}></textarea>
+                    <label className={`${styles.label}`}>
+                      Title
+                      <input type="text" className={`${styles.input}`} />
+                    </label>
+                    <label className={`${styles.labelA}`}>
+                      Description
+                      <textarea cols="50" rows="5" className={`${styles.inputA}`}></textarea>
+                    </label>
                 </div>
+              </div>
+              <button type="submit" className={`${styles.button}`}>Submit</button>
             </form>
         </div>
       </main>
     </>
   )
 }
+
