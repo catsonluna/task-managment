@@ -66,17 +66,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 10%;
+    width: 7%;
     height: 10%;
-    background: none;
+    background: white;
+    border-radius: 30px;
     border: none;
     color: #55A6F1;
     font-size: large;
     font-weight: bold;
-    transition: text-shadow 0.3s ease;
+    transition: text-shadow 0.3s ease, box-shadow 0.3s ease;
 }
 .button:hover{
     text-shadow: 2px 2px black;
+    box-shadow: 2px 2px black;
 }
 .label{
     display: flex;
