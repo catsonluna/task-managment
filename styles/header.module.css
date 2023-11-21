@@ -4,7 +4,7 @@
     justify-content: center;
     flex-direction: row;
     width: 100%;
-    background-color: #e1d9d1;
+    background-color: #d3e1d1;
 }
 .header{
     display: flex;
@@ -19,7 +19,7 @@
 }
 .res{
     margin-left: 30px;
-    color: #55A6F1;
+    color: white;
     font-weight: bold;
     font-size: 32px;
     transition: text-shadow 0.3s ease;
