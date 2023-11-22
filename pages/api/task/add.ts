@@ -1,10 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Success } from '../types';
-import { shaHash } from '@/lib/utils';
-type Data = {
-  name: string
-}
+import { shaHash, getPrisma } from '@/lib/utils';
 
 export default async function handler(
   req: NextApiRequest,
@@ -49,32 +46,36 @@ export default async function handler(
     }
     const tokenHash = shaHash(session_token as string);
 
-    const session = await connection.promise().query(
-        `SELECT * FROM sessions WHERE token = ?`,
-        [tokenHash]
-    );
+    const prisma = getPrisma();
 
-    if (session[0].length === 0) {
+    const session = await prisma.session.findUnique({
+        where: {
+            session_hash: tokenHash
+        }
+    });
+
+    if (!session) {
         return res.status(401).json({
                 success: false,
                 cause: "invalid_session"
         });
     }
 
-    connection.query(
-        `INSERT INTO tasks (name, description, dueDate, user_id) VALUES (?, ?, ?, ?)`,
-        [name, description, dueDate, session[0][0].user_id],
-        (error, results, fields) => {
-            if (error) {
-                return res.status(500).json({
-                        success: false,
-                        cause: "internal_server_error"
-                });
+    const task = await prisma.task.create({
+        data: {
+            title: name,
+            description: description,
+            dueTill: dueDate as Date,
+            user: {
+                connect: {
+                    user_id: session.user_id
+                }
             }
-
-            return res.status(200).json({
-                success: true,
-            });
         }
-    );    
+    });
+
+    return res.status(200).json({
+            success: true,
+    });
+
 }

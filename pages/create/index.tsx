@@ -9,7 +9,7 @@ import Cal from '../components/calendar'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
 
 };
@@ -39,7 +39,7 @@ export default function Home() {
                     </label>
                     <label className={`${styles.labelA}`}>
                       Description
-                      <textarea cols="50" rows="5" className={`${styles.inputA}`}></textarea>
+                      <textarea cols={50} rows={5} className={`${styles.inputA}`}></textarea>
                     </label>
                 </div>
               </div>

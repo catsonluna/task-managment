@@ -9,19 +9,8 @@ const DynamicCalendar = dynamic(
 )
 
 function Cal() {
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(new Date());
 
-  useEffect(() => {
-    setDate(new Date());
-
-    const timer = setInterval(() => {
-      setDate(new Date());
-    }, 86400000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
 
   return (
     <div>
