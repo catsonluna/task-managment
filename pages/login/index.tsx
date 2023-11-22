@@ -26,16 +26,16 @@ export default function Home() {
                 {isSignUp && <input type="email" id="email" className={`${styles.input}`} placeholder='Email'/>} 
                 <input type="password" id="password" className={`${styles.input}`} placeholder='Password'/>
                 {!isSignUp && <div className={`${styles.al}`}> 
-                    <a onClick={() => setIsModalOpen(true)}>Forgot password?</a> 
+                    <a onClick={() => setIsModalOpen(true)} className={`${styles.point}`}>Forgot password?</a> 
                 </div>}
                 <button type="submit" className={`${styles.submit}`}>{isSignUp ? 'Signup' : 'Login'}</button>
             </form>
-            <a onClick={() => setIsSignUp(!isSignUp)}> 
+            <a onClick={() => setIsSignUp(!isSignUp)} className={`${styles.point}`}> 
               {isSignUp ? 'Already have an account? Login' : 'Dont have an account? Signup'}
             </a>
         </div>
         <ReactModal isOpen={isModalOpen} className={`${styles.mod}`}> 
-          <h2>Reset Password</h2>
+          <h2 className={`${styles.h1}`}>Reset Password</h2>
           <input type="email" id="email" className={`${styles.inputmod}`} placeholder='Email'/>
           <button type="submit" className={`${styles.submitmod}`}>Submit</button> 
           <button onClick={() => setIsModalOpen(false)} className={`${styles.submitmod}`}>Close</button> 

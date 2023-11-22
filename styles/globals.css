@@ -90,6 +90,8 @@ body {
 .react-calendar{
   width: 70% !important;
   height: 50vh;
+  width: 50vh !important;
+  border-radius: 10px;
 }
 .react-calendar__viewContainer{
   display: flex;
