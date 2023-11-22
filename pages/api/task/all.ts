@@ -1,34 +1,40 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { shaHash } from '@/lib/utils'
+import { shaHash, getPrisma } from '@/lib/utils'
 import { Task } from '../types'
 
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Task[]>
+  res: NextApiResponse<any>
 ) {
     const [session_token] = req.headers.session_token as string[];
     const tokenHash = shaHash(session_token);
-    
-    const session = await connection.promise().query(
-        `SELECT * FROM sessions WHERE token_hash = ?`,
-        [tokenHash]
-    );
 
-    if (session[0].length === 0) {
+    const prisma = getPrisma();
+
+    const session = await prisma.session.findUnique({
+        where: {
+            session_hash: tokenHash
+        }
+    });
+
+    if (!session) {
         return res.status(401).json({
-                success: false,
-                cause: "invalid_session"
+            success: false,
         });
     }
 
-    const tasks = await connection.promise().query(
-        `SELECT * FROM tasks WHERE user_id = ?`,
-        [session[0][0].user_id]
-    );
+    const tasks = await prisma.task.findMany({
+        where: {
+            user_id: session.user_id
+        }
+    });
 
-
+    return res.status(200).json({
+        tasks: tasks,
+        success: true
+    });
     
 
 }

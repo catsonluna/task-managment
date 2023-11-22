@@ -23,7 +23,7 @@ model Session {
   session_id String   @id @default(uuid())
   createdAt  DateTime @default(now())
   expiresAt  DateTime
-  session_hash String
+  session_hash String @unique
   user_id    String
 }
 
@@ -31,7 +31,8 @@ model Task {
   task_id   String   @id @default(uuid())
   title     String 
   description String
-  completed Boolean
+  completed Boolean @default(false)
+  highPriority Boolean @default(false)
   createdAt DateTime @default(now())
   dueTill DateTime 
   user      User     @relation(fields: [user_id], references: [user_id])
