@@ -21,7 +21,7 @@ export default function Home() {
             <div className={`${styles.req}`}>{/*this month*/}
                 <h1 className={`${styles.h1}`}>This month</h1>
                 <div className={`${styles.tasks}`}>{/*parada tasks*/}
-
+                  
                 </div>
             </div>
             <div className={`${styles.req}`}>{/*next month*/}
