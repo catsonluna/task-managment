@@ -13,10 +13,6 @@ export default function Home() {
     event.preventDefault();
   };
 
-  const handleToggle = () => {
-    setIsToggled(!isToggled);
-  }
-
   return (
     <>
       <Head>
