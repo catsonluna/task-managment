@@ -19,11 +19,14 @@ export default function Home() {
         <Header />
         Task Management!
         <div className={styles.description}>
+        <div className={styles.description1}>
           <h1>We are a website based entirely around keeping track of your work! We want to
 ensure an easy and simple experience when it comes to creating tasks, getting 
 reminders for them, and much more! Please take a loot at the rest of the website 
 to see all of the possibilities we have to offer!</h1>
-<div className={styles.description2}>
+
+        </div>
+        <div className={styles.description2}>
 <h2>Please leave any suggestions in one of the following emails.
 </h2>
 <h2>ipb21.j.disereits@vtdt.edu.lv
@@ -34,7 +37,7 @@ ipb21.e.berzons@vtdt.edu.lv
 <h2>
 ipb21.k.voss@vtdt.edu.lv</h2>
   </div>
-        </div>
+          </div>
       </main>
     </>
   )

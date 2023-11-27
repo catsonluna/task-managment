@@ -4,11 +4,39 @@ import styles from '@/styles/login.module.css'
 import Header from '../components/header'
 import ReactModal from 'react-modal';
 import { useState } from 'react'; 
+import axios from 'axios';
+import { setCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const [isSignUp, setIsSignUp] = useState(false); 
   const [isModalOpen, setIsModalOpen] = useState(false); 
+  const router = useRouter();
+
+  const singup = (event: any) => {
+
+    axios.post("/api/auth/register", {
+      username: event.target.username.value,
+      email: event.target.email.value,
+      password: event.target.password.value
+    }).then((res) => {
+      console.log(res.data.data); 
+      setCookie('token', res.data.data.token, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: '/',
+      });
+    }).catch((err) => {
+      console.log(err); 
+    }
+    )
+    router.push('/');
+  }
+
+  const login = (event: any) => {
+
+  }
 
   return (
     <>
@@ -21,7 +49,15 @@ export default function Home() {
         <Header />
         <div className={`${isSignUp ? styles.signup : styles.login}`}>
             <h2 className={styles.subTitle}>{isSignUp ? 'Signup' : 'Login'}</h2>
-            <form action="#" className={`${styles.content}`}>
+            <form action="#" className={`${styles.content}`} onSubmit={(e: any)=>{
+              e.preventDefault();
+              if(isSignUp) {
+                singup(e); 
+              }
+              else {
+                login(e); 
+              }
+            }}>
                 <input type="text" id="username" className={`${styles.input}`} placeholder='Username'/>
                 {isSignUp && <input type="email" id="email" className={`${styles.input}`} placeholder='Email'/>} 
                 <input type="password" id="password" className={`${styles.input}`} placeholder='Password'/>

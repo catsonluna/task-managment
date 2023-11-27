@@ -67,7 +67,7 @@ export function generateSecret(len: number) {
 }
 
 export async function usernameTaken(username: string){
-    const user = await prisma.user.findUnique({
+    const user = await getPrisma().user.findUnique({
         where: {
             username: username
         }
@@ -76,7 +76,7 @@ export async function usernameTaken(username: string){
 }
 
 export async function emailTaken(email: string){
-    const user = await prisma.user.findUnique({
+    const user = await getPrisma().user.findUnique({
         where: {
             email: email
         }

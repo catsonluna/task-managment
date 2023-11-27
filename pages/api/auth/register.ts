@@ -61,7 +61,7 @@ export default async function handler(
             });
         }
 
-        if (checkUsername(username)) {
+        if (!checkUsername(username)) {
             return res.status(400).json({
                 success: {
                     success: false,
