@@ -96,6 +96,18 @@ a {
   text-decoration: none;
 }
 
+.rdtPicker {
+  display: none;
+  position: absolute;
+  width: 250px;
+  min-width: 250px;
+  padding: 4px;
+  margin-top: 1px;
+  z-index: 99999 !important;
+  background: black;
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  border: 1px solid #f9f9f9;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
