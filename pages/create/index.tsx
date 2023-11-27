@@ -11,7 +11,8 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const handleSubmit = (event: any) => {
     event.preventDefault();
-  };
+
+};
 
   return (
     <>
@@ -40,13 +41,6 @@ export default function Home() {
                       Description
                       <textarea cols={50} rows={5} className={`${styles.inputA}`}></textarea>
                     </label>
-                    <div className={`${styles.labelC}`}>
-                      <h1 className={`${styles.h1}`}>Make high priority</h1>
-                      <label className={`${styles.toggle}`}>
-                        <input type="checkbox" className={`${styles.check}`}></input>
-                        <span className={`${styles.slider}`}></span>
-                      </label>
-                    </div>
                 </div>
               </div>
               <button type="submit" className={`${styles.button}`}>Submit</button>
@@ -56,3 +50,4 @@ export default function Home() {
     </>
   )
 }
+
