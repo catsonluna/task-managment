@@ -8,8 +8,8 @@
 .calc{
     display: flex;
     width: 90%;
-    height: 70vh;
-    align-items: center;
+    height: 20vh;
+    align-items: flex-start;
     justify-content: center;
     padding: 20px;
     margin-right: 20px;
@@ -61,6 +61,7 @@
 }.row{
     display: flex;
     width: 100%;
+    align-items: center;
     justify-content: space-evenly;
     flex-direction: row-reverse;
 }
@@ -146,11 +147,11 @@
     border-radius: 50%;
 }
 .check:checked + .slider {
-    background-color: #2196F3;
+    background-color: crimson;
   }
   
   .check:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px crimson;
   }
   
   .check:checked + .slider:before {
