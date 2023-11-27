@@ -23,6 +23,7 @@
     font-weight: bold;
     font-size: 32px;
     transition: text-shadow 0.3s ease;
+    cursor: pointer;
 }
 .res:hover{
     text-shadow: 3px 3px black;
