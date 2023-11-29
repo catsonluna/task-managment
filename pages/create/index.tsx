@@ -29,7 +29,10 @@ export default function Home() {
               <div className={`${styles.row}`}>
                 <div className={`${styles.fix}`}>{/*date*/}
                     <div className={`${styles.calc}`}>
+                      <label className={`${styles.labelCal}`}>
+                        Date
                         <Cal />
+                      </label>
                     </div>
                 </div>
                 <div className={`${styles.formatting}`}>{/*viss parejais*/}
