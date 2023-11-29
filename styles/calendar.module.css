@@ -31,6 +31,8 @@
     border: 1px solid black;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     width: 100%;
     cursor: default;
 }
@@ -43,6 +45,8 @@
     border: 1px solid black;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     width: 100%;
     cursor: default;
 }
@@ -55,13 +59,44 @@
     border: 1px solid black;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     width: 100%;
     cursor: default;
 }
 .tasks{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     gap: 5px;
+    width: 100%;
+    overflow-y: auto;
+}
+.list{
+    display: flex;
+    background-color: white;
+    padding: 8px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    color: black;
+    width: 28vw;
+}
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3px solid black;
+}
+.desc{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3px solid black;
+}
+.date{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
