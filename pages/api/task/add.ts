@@ -14,7 +14,7 @@ export default async function handler(
         });
     }
 
-    const { name, description, dueDate } = req.body;
+    const { name, description, dueDate, highPriority } = req.body;
     const { session_token } = req.headers;
 
     if (!name) {
@@ -71,6 +71,7 @@ export default async function handler(
             title: name,
             description: description,
             dueTill: dueDateDate,
+            highPriority: highPriority == "true" ? true : false,
             user: {
                 connect: {
                     user_id: session.user_id

@@ -15,6 +15,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const router = useRouter();
   const [date, setDate] = useState(Moment());
+  const [highPriority, setHighPriority] = useState(false);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -25,7 +26,8 @@ export default function Home() {
     axios.post("/api/task/add", {
       name: event.target.title.value,
       description: event.target.description.value,
-      dueDate: date.valueOf()
+      dueDate: date.valueOf(),
+      highPriority: highPriority ? "true" : "false"
     }, {
       headers: {
         "session_token": getCookie("token")
@@ -75,7 +77,9 @@ export default function Home() {
                     <div className={`${styles.fixed}`}>
                       <h1 className={`${styles.high}`}>High priority</h1>
                       <label className={`${styles.toggle}`}>
-                        <input type="checkbox" className={`${styles.check}`} />
+                        <input type="checkbox" className={`${styles.check}`} onChange={(e) => {
+                          setHighPriority(e.target.checked);
+                        }} />
                         <span className={`${styles.slider}`}></span>
                       </label>
                     </div>
