@@ -72,6 +72,13 @@ export default function Home() {
                       Description
                       <textarea cols={50} rows={5} className={`${styles.inputA}`} name={"description"} required ></textarea>
                     </label>
+                    <div className={`${styles.fixed}`}>
+                      <h1 className={`${styles.high}`}>High priority</h1>
+                      <label className={`${styles.toggle}`}>
+                        <input type="checkbox" className={`${styles.check}`} />
+                        <span className={`${styles.slider}`}></span>
+                      </label>
+                    </div>
                 </div>
               </div>
               <button type="submit" className={`${styles.button}`}>Submit</button>
