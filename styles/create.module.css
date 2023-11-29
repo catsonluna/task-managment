@@ -193,4 +193,5 @@
 .high{
     font-size: large;
     color: #55A6F1;
+    cursor: default;
 }
