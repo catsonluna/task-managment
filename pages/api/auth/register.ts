@@ -108,7 +108,7 @@ export default async function handler(
                 user_id: user.user_id,
                 expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
             },
-        }).then((session) => {
+        }).then(() => {
             res.status(200).json({
                 success: {
                     success: true,
@@ -117,7 +117,7 @@ export default async function handler(
                     token: sessionToken,
                 },
             });
-        }).catch((error) => {
+        }).catch(() => {
             res.status(500).json({
                 success: {
                     success: false,
