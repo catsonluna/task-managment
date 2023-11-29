@@ -1,6 +1,7 @@
 export type Success = {
     success: boolean;
     cause?: string;
+    data?: any;
 }
 
 export type SessionToken = {
