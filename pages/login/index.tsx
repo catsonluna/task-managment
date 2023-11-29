@@ -35,7 +35,20 @@ export default function Home() {
   }
 
   const login = (event: any) => {
-
+    axios.post("/api/auth/login", {
+      username: event.target.username.value,
+      password: event.target.password.value
+    }).then((res) => {
+      console.log(res.data.data); 
+      setCookie('token', res.data.data.token, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: '/',
+      });
+    }
+    ).catch((err) => {
+      console.log(err); 
+    }
+    )
   }
 
   return (

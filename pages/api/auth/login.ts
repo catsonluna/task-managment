@@ -52,7 +52,7 @@ export default async function handler(
         });
     }
 
-    const passwordMatch = await verifyPassword(password, user.password);
+    const passwordMatch = await verifyPassword(user.password, password);
 
     if (!passwordMatch) {
         return res.status(401).json({

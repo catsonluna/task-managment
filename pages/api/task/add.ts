@@ -61,11 +61,16 @@ export default async function handler(
         });
     }
 
+    // get duedate from int and convert to date
+    const dueDateInt = parseInt(dueDate as string);
+    const dueDateDate = new Date(dueDateInt);
+
+
     const task = await prisma.task.create({
         data: {
             title: name,
             description: description,
-            dueTill: dueDate as Date,
+            dueTill: dueDateDate,
             user: {
                 connect: {
                     user_id: session.user_id

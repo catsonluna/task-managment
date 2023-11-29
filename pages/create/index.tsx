@@ -5,13 +5,39 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/create.module.css'
 import Header from '../components/header'
 import Cal from '../components/calendar'
+import Moment from 'moment';
+import axios from 'axios';
+import { getCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const router = useRouter();
+  const [date, setDate] = useState(Moment());
+
   const handleSubmit = (event: any) => {
     event.preventDefault();
+    console.log(date.valueOf());
+    console.log(event.target.title.value);
+    console.log(event.target.description.value);
 
+    axios.post("/api/task/add", {
+      name: event.target.title.value,
+      description: event.target.description.value,
+      dueDate: date.valueOf()
+    }, {
+      headers: {
+        "session_token": getCookie("token")
+      }
+    }).then((res) => {
+      router.push('/calendar');
+
+    }
+    ).catch((err) => {
+      console.log(err);
+    }
+    )
 };
 
   return (
@@ -31,18 +57,20 @@ export default function Home() {
                     <div className={`${styles.calc}`}>
                       <label className={`${styles.labelCal}`}>
                         Date
-                        <Cal />
+                        <Cal onChangeDate={(e) => {
+                          setDate(e);
+                        }} />
                       </label>
                     </div>
                 </div>
                 <div className={`${styles.formatting}`}>{/*viss parejais*/}
                     <label className={`${styles.label}`}>
                       Title
-                      <input type="text" className={`${styles.input}`} />
+                      <input type="text" className={`${styles.input}`} name={"title"} required/>
                     </label>
                     <label className={`${styles.labelA}`}>
                       Description
-                      <textarea cols={50} rows={5} className={`${styles.inputA}`}></textarea>
+                      <textarea cols={50} rows={5} className={`${styles.inputA}`} name={"description"} required ></textarea>
                     </label>
                 </div>
               </div>
