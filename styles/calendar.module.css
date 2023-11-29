@@ -21,6 +21,7 @@
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
+    gap: 5px;
 }
 .h1{
     display: flex;
@@ -69,34 +70,116 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 5px;
+    gap: 10px;
+    width: 100%;
+    overflow-y: auto;
+}
+.tasks1{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    overflow-y: auto;
+}
+.tasks2{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
     width: 100%;
     overflow-y: auto;
 }
 .list{
     display: flex;
     background-color: white;
-    padding: 8px;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     color: black;
     width: 28vw;
+    font-size: x-small;
+    color: black;
+    margin-left: 10px;
+    border-radius: 20px;
 }
 .title{
     display: flex;
     align-items: center;
     justify-content: center;
     border-bottom: 3px solid black;
+    padding: 10px;
+    width: 100%;
 }
 .desc{
     display: flex;
     align-items: center;
     justify-content: center;
     border-bottom: 3px solid black;
+    padding: 10px;
+    width: 100%;
 }
 .date{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    padding: 10px;
+    width: 100%;
 }
+
+.tasks::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .tasks::-webkit-scrollbar-track {
+    background: white;
+    border-radius: 30px;
+  }
+   
+  .tasks::-webkit-scrollbar-thumb {
+    background: #55A6F1;
+    border-radius: 30px;
+  }
+  
+  .tasks::-webkit-scrollbar-thumb:hover {
+    background: navy; 
+  }
+
+.tasks1::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .tasks1::-webkit-scrollbar-track {
+    background: white;
+    border-radius: 30px;
+  }
+   
+  .tasks1::-webkit-scrollbar-thumb {
+    background: purple;
+    border-radius: 30px;
+  }
+  
+  .tasks1::-webkit-scrollbar-thumb:hover {
+    background: pink; 
+  }
+
+.tasks2::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .tasks2::-webkit-scrollbar-track {
+    background: white;
+    border-radius: 30px;
+  }
+   
+  .tasks2::-webkit-scrollbar-thumb {
+    background: crimson;
+    border-radius: 30px;
+  }
+  
+  .tasks2::-webkit-scrollbar-thumb:hover {
+    background: #ff2400; 
+  }
+  

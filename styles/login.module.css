@@ -69,6 +69,7 @@
     justify-content: center;
     color: #55A6F1;
     border-radius: 15px;
+    padding: 10px;
 }
 .inputmod::placeholder{
     color: #55A6F1;
