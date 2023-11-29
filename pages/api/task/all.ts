@@ -8,8 +8,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-    const [session_token] = req.headers.session_token as string[];
-    const tokenHash = shaHash(session_token);
+    const { session_token } = req.headers;
+
+    if (!session_token) {
+        return res.status(400).json({
+                success: false,
+                cause: "session_token_required"
+        });
+    }
+    const tokenHash = shaHash(session_token as string);
 
     const prisma = getPrisma();
 
@@ -21,7 +28,8 @@ export default async function handler(
 
     if (!session) {
         return res.status(401).json({
-            success: false,
+                success: false,
+                cause: "invalid_session"
         });
     }
 

@@ -3,10 +3,45 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/calendar.module.css'
 import Header from '../components/header'
+import { useEffect, useState } from 'react'
+import { getCookie } from 'cookies-next'
+import axios from 'axios'
+import Task from '../components/task'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+  const [tasks, setTasks] = useState([{
+    title: "",
+    description: "",
+    dueTill: "",
+    highPriority: false,
+    completed: false,
+    createdAt: "",
+
+  }]);
+
+  useEffect(() => {
+    axios.get("/api/task/all", {
+      headers: {
+        "session_token": getCookie("token")
+      }
+    }).then((res) => {
+      console.log(res.data.tasks);
+      setTasks(res.data.tasks.sort((a: any, b: any) => {
+        return new Date(a.dueTill).getTime() - new Date(b.dueTill).getTime();
+      }
+      ));
+
+    }
+    ).catch((err) => {
+      console.log(err);
+    }
+    )
+    
+  }, [])
+
   return (
     <>
       <Head>
@@ -22,30 +57,49 @@ export default function Home() {
                 <h1 className={`${styles.h1}`}>This month</h1>
                 <div className={`${styles.tasks}`}>{/*parada tasks*/}
 
-                  <div className={`${styles.list}`}>{/*main list*/}
-                    <div className={`${styles.title}`}>{/*title*/}
-                      <h1>Title</h1>
-                    </div>
-                    <div className={`${styles.desc}`}>{/*desc*/}
-                      <h1>description</h1>
-                    </div>
-                    <div className={`${styles.date}`}>{/*date*/}
-                      <h1>Date</h1>
-                    </div>
-                  </div>
+                {/** only show those tasks, that are due this month */}
+                {tasks.map((task) => {
+                  const dueTillDate = new Date(task.dueTill);
+                  const today = new Date();
+                  if (dueTillDate.getMonth() == today.getMonth()) {
+                    return (
+                      <Task title={task.title} description={task.description} dueTill={task.dueTill} highPriority={task.highPriority} completed={task.completed} createdAt={task.createdAt} />
+                    )
+                  }
+                })}
+
 
                 </div>
             </div>
             <div className={`${styles.req}`}>{/*next month*/}
                 <h1 className={`${styles.h2}`}>Next month</h1>
                 <div className={`${styles.tasks1}`}>{/*parada tasks*/}
+                {/** only show those tasks, that are due next month */}
+                {tasks.map((task) => {
+                  const dueTillDate = new Date(task.dueTill);
+                  const today = new Date();
+                  if (dueTillDate.getMonth() == today.getMonth() + 1) {
+                    return (
+                      <Task title={task.title} description={task.description} dueTill={task.dueTill} highPriority={task.highPriority} completed={task.completed} createdAt={task.createdAt} />
+                    )
+                  }
+                })}
 
                 </div>
             </div>
             <div className={`${styles.req}`}>{/*high priority*/}
                 <h1 className={`${styles.h3}`}>High Priority</h1>
                 <div className={`${styles.tasks2}`}>{/*parada tasks*/}
-
+                {/** only show those tasks, that are high priority */}
+                {tasks.map((task) => {
+                  console.log(task.highPriority);
+                  if (task.highPriority) {
+                    return (
+                      <Task title={task.title} description={task.description} dueTill={task.dueTill} highPriority={task.highPriority} completed={task.completed} createdAt={task.createdAt} />
+                    )
+                  }
+                }
+                )}
                 </div>
             </div>
         </div>
