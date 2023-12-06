@@ -194,9 +194,19 @@
   }
   .req{
     width: 80%;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   .list{
     width: 90%;
+  }
+  .tasks{
+    height: 21vh;
+  }
+  .tasks1{
+    height: 21vh;
+  }
+  .tasks2{
     height: 21vh;
   }
 }
