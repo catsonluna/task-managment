@@ -129,6 +129,7 @@
 .point{
     cursor: pointer;
 }
+
 @media only screen and (max-width: 900px){
     .login{
         width: 90%;
@@ -148,3 +149,4 @@
         transform: translate(15%, 50%);
     }
 }
+
