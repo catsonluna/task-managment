@@ -72,7 +72,7 @@ export default function Home() {
                     </label>
                     <label className={`${styles.labelA}`}>
                       Description
-                      <textarea cols={50} rows={5} className={`${styles.inputA}`} name={"description"} required ></textarea>
+                      <textarea className={`${styles.inputA}`} name={"description"} required ></textarea>
                     </label>
                     <div className={`${styles.fixed}`}>
                       <h1 className={`${styles.high}`}>High priority</h1>
