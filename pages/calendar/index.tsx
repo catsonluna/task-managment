@@ -21,6 +21,16 @@ export default function Home() {
     createdAt: "",
 
   }]);
+  const getNextMonth = (dueTillDate) => {
+    const today = new Date();
+      if(today.getMonth() == 12){ //or maybe 12 not sure parbaudit  
+        if (dueTillMonth.getMonth() == 1){ // or 1 idk check
+          return true
+        }else if(dueTillMonth.getMonth() == today.getMonth() + 1){
+          return true;
+        }else{
+          return false
+        }}};
 
   useEffect(() => {
     axios.get("/api/task/all", {
