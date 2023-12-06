@@ -195,4 +195,8 @@
   .req{
     width: 80%;
   }
+  .list{
+    width: 90%;
+    height: 21vh;
+  }
 }
