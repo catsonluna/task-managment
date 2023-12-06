@@ -182,4 +182,17 @@
   .tasks2::-webkit-scrollbar-thumb:hover {
     background: #ff2400; 
   }
-  
+@media only screen and (max-width: 900px){
+  .description{
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .main{
+    overflow-y: scroll;
+  }
+  .req{
+    width: 80%;
+  }
+}
