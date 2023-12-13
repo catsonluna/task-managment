@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
@@ -16,6 +16,12 @@ export default function Home() {
   const router = useRouter();
   const [date, setDate] = useState(Moment());
   const [highPriority, setHighPriority] = useState(false);
+
+  useEffect(() => {
+    if (!getCookie("token")) {
+      router.push("/login");
+    }
+  }, [])
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
