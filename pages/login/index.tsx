@@ -88,10 +88,50 @@ export default function Home() {
         maxAge: 30 * 24 * 60 * 60,
         path: '/',
       });
+      router.push('/');
     }
     ).catch((err) => {
       console.log(err); 
+      switch (err.response.data.success.cause) {
+        case "username_required" || "password_required":
+          toast.error("Please fill out all fields!", {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            draggable: true,
+          });
+          break;
+        case "invalid_credentials":
+          toast.error("Username not found!", {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            draggable: true,
+          });
+          break;
+        case "invalid_password":
+          toast.error("Password incorrect!", {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            draggable: true,
+          });
+          break;
+        default:
+          toast.error("Something went wrong!", {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            draggable: true,
+          });
+          break;
+      }
     }
+
     )
   }
 
