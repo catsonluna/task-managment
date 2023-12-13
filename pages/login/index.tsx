@@ -13,8 +13,9 @@ import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [email, setEmail] = useState(''); 
   const router = useRouter();
 
   const singup = (event: any) => {
@@ -134,6 +135,20 @@ export default function Home() {
       });
   };
 
+  const handleResetPassword = async (event: any) => {
+    event.preventDefault();
+    const response = await fetch('/api/your-api-route', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+    });
+    const data = await response.json();
+    console.log(data);
+    setIsModalOpen(false);
+  }
+
   return (
     <>
       <Head>
@@ -233,23 +248,13 @@ export default function Home() {
         </div>
         <ReactModal isOpen={isModalOpen} className={`${styles.mod}`}>
           <h2 className={`${styles.h1}`}>Reset Password</h2>
-          <input
-            type="email"
-            id="email"
-            className={`${styles.inputmod}`}
-            placeholder="Email"
-          />
-          <button type="submit" className={`${styles.submitmod}`}>
-            Submit
-          </button>
-          <button
-            onClick={() => setIsModalOpen(false)}
-            className={`${styles.submitmod}`}
-          >
-            Close
-          </button>
+          <form onSubmit={handleResetPassword}>
+            <input type="email" id="email" className={`${styles.inputmod}`} placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
+            <button type="submit" className={`${styles.submitmod}`}>Submit</button> 
+          </form>
+          <button onClick={() => setIsModalOpen(false)} className={`${styles.submitmod}`}>Close</button> 
         </ReactModal>
       </main>
     </>
-  );
+  )
 }
