@@ -219,7 +219,7 @@ export default function Home() {
         </div>
         <ReactModal isOpen={isModalOpen} className={`${styles.mod}`}>
           <h2 className={`${styles.h1}`}>Reset Password</h2>
-          <form onSubmit={handleResetPassword}>
+          <form className={`${styles.from}`} onSubmit={handleResetPassword}>
             <input type="email" id="email" className={`${styles.inputmod}`} placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
             <button type="submit" className={`${styles.submitmod}`}>Submit</button> 
           </form>
