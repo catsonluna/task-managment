@@ -97,16 +97,27 @@ export default function Home() {
 
   const handleResetPassword = async (event: any) => {
     event.preventDefault();
-    const response = await fetch('/api/your-api-route', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-    });
-    const data = await response.json();
-    console.log(data);
-    setIsModalOpen(false);
+    axios.post("/api/auth/resetPassword", {
+      email: email
+    }).then((res) => {
+      console.log(res.data);
+      toast.success("Email sent!", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+      });
+    }).catch((err) => {
+      console.log(err);
+      toast.error("Something went wrong!", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+      });
+    })      
   }
 
   return (
