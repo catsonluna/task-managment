@@ -11,24 +11,10 @@
   padding: 10px;
 }
 
-.description {
+.description,
+.description1,
+.description2 {
   margin: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 0.560rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
-  border-radius: 40px;
-background: #F2F2F2;
-}
-
-.description1 {
-  margin: 10px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -41,27 +27,20 @@ background: #F2F2F2;
   z-index: 2;
   font-family: var(--font-mono);
   border-radius: 40px;
-background: #F2F2F2;
+  background: #F2F2F2;
+}
+
+.description1 {
+  margin: 10px;
+  padding: 20px;
 }
 
 .description2 {
   margin: 0px;
   padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 0.560rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
   border-radius: 0px 0px 40px 40px;
-background: #9F9F9F;
+  background: #9F9F9F;
 }
-
-
 
 .description a {
   display: flex;
@@ -77,6 +56,7 @@ background: #9F9F9F;
   background-color: rgba(var(--callout-rgb), 0.5);
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
   border-radius: var(--border-radius);
+  font-size: 0.9rem;
 }
 
 .code {
@@ -122,21 +102,21 @@ background: #9F9F9F;
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 4rem 0;
+  padding: 2rem 0; /* Adjusted padding for mobile */
 }
 
 .center::before {
   background: var(--secondary-glow);
   border-radius: 50%;
-  width: 480px;
-  height: 360px;
-  margin-left: -400px;
+  width: 300px; /* Adjusted width for mobile */
+  height: 225px; /* Adjusted height for mobile */
+  margin-left: -250px; /* Adjusted margin for mobile */
 }
 
 .center::after {
   background: var(--primary-glow);
-  width: 240px;
-  height: 180px;
+  width: 150px; /* Adjusted width for mobile */
+  height: 112.5px; /* Adjusted height for mobile */
   z-index: -1;
 }
 
@@ -152,6 +132,7 @@ background: #9F9F9F;
 .logo {
   position: relative;
 }
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
@@ -171,28 +152,29 @@ background: #9F9F9F;
 }
 
 /* Mobile */
-@media (max-width: 700px) {
-  .content {
-    padding: 4rem;
+@media (max-width: 320px) {
+  .main {
+    font-size: 1.5rem;
+  }
+
+  .description,
+  .description1,
+  .description2 {
+    margin: 10px;
+    padding: 15px;
+    font-size: 0.8rem;
   }
 
   .grid {
     grid-template-columns: 1fr;
-    margin-bottom: 120px;
-    max-width: 320px;
-    text-align: center;
   }
 
   .card {
     padding: 1rem 2.5rem;
   }
 
-  .card h2 {
-    margin-bottom: 0.5rem;
-  }
-
   .center {
-    padding: 8rem 0 6rem;
+    padding: 2rem 0;
   }
 
   .center::before {
@@ -200,12 +182,12 @@ background: #9F9F9F;
     height: 300px;
   }
 
-  .description {
-    font-size: 0.8rem;
+  .description p {
+    font-size: 0.9rem;
   }
 
   .description a {
-    padding: 1rem;
+    padding: 0.5rem;
   }
 
   .description p,
@@ -248,13 +230,14 @@ background: #9F9F9F;
 }
 
 /* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
+@media (min-width: 768px) and (max-width: 1120px) {
   .grid {
     grid-template-columns: repeat(2, 50%);
   }
 }
 
-@media (prefers-color-scheme: dark) {
+/* Additional adjustments for dark mode on smaller screens */
+@media (prefers-color-scheme: dark) and (max-width: 767px) {
   .vercelLogo {
     filter: invert(1);
   }
