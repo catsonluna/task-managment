@@ -95,7 +95,6 @@
     border: none;
     width: 30%;
     height: 10%;
-    margin-top: 25px;
     border-radius: 30px;
     cursor: pointer;
 }
@@ -129,7 +128,15 @@
 .point{
     cursor: pointer;
 }
-
+.from{
+    width: 50%;
+    height: 50%;
+    gap: 60px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
 @media only screen and (max-width: 900px){
     .login{
         width: 90%;
