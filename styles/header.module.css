@@ -36,7 +36,17 @@
         justify-content: center;
         width: 100%;
     }
+    .header .res{
+        display: none;
+    }
+    .header .current{
+        display: block;
+    }
+    .header.expanded .res{
+        display: block;
+    }
     .res{
         font-size: 24px;
+        margin-left: 0px;
     }
 }
