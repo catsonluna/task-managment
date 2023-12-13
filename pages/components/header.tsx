@@ -38,9 +38,7 @@ function Header(){
                         isLogedIn ? <a className={`${style.res}`} onClick={() => {
                             deleteCookie('token');
                             router.push('/');
-                        }}>Logout</a> : <a className={`${style.res}`} onClick={() => {
-                            router.push('/login');
-                        }}>Login/Signup</a>
+                        }}>Logout</a> : <a className={`${style.res} ${router.pathname === '/login' ? style.current : ''}`} href="/login" onClick={handleClick}>Login/Signup</a>
                     }
                 </div>
             </div>
