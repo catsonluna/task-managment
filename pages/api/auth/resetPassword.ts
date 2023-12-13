@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { hashPassword, getPrisma, generateSecret } from '@/lib/utils'
+import { sendPasswordResetEmail } from '@/lib/sendEmail';
 
 type Data = {
   message: string
@@ -32,6 +33,7 @@ export default async function handler(
             password: hashedPassword
         }});
   if (update) {
+    sendPasswordResetEmail(email, password);
     res.status(200).json({ message: 'Password updated successfully' })
   } else {
     res.status(500).json({ message: 'Error updating password' })

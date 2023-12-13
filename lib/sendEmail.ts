@@ -2,12 +2,12 @@ import { createTransport } from "nodemailer";
 
 
 const transporter = createTransport({
-    host: "smtp-relay.brevo.com",
+    host: "smtp.sendgrid.net",
     port: 587,
     secure: false,
     auth: {
-        user: "pinkulumc@gmail.com",
-        pass: "APUO9kDsT6y8KahI",
+        user: "apikey",
+        pass: "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",
     },
 });
 
