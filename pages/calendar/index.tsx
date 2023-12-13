@@ -7,10 +7,18 @@ import { useEffect, useState } from 'react'
 import { getCookie } from 'cookies-next'
 import axios from 'axios'
 import Task from '../components/task'
+import { useRouter } from 'next/router'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!getCookie("token")) {
+      router.push("/login");
+    }
+  }, [])
 
   const [tasks, setTasks] = useState([{
     title: "",
