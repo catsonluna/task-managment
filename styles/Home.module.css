@@ -13,8 +13,7 @@
 }
 
 .description,
-.description1,
-.description2 {
+.description1 {
   margin: 15px;
   padding: 20px;
   display: flex;
@@ -31,11 +30,36 @@
   background: #F2F2F2;
 }
 
-.description1 {
+.description2 {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 0.560rem;
+  max-width: var(--max-width);
+  width: 100%;
+  font-family: var(--font-mono);
+  border-radius: 40px;
+}
+
+.description3 {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.20rem;
+  max-width: var(--max-width);
+  width: 100%;
+  font-family: var(--font-mono);
+  border-radius: 40px;
 }
 
 .description2 {
-  border-radius: 0px 0px 40px 40px;
+  border-radius: 5px 5px 40px 40px;
   background: #9F9F9F;
 }
 

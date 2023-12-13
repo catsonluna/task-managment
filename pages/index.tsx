@@ -10,8 +10,8 @@ export default function Home() {
   return (
     <><Header />
       <main className={`${styles.main}`}>
-        
-        Task Management!
+      <div className={styles.description3}>
+       <h1> Task Management!</h1></div>
         <div className={styles.description}>
           <div className={styles.description1}>
             <h1>
