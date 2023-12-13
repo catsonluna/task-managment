@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 function Header(){
     const [isLogedIn, setIsLogedIn] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
     useEffect(() => {
         const token = getCookie('token');
         if(token) {
@@ -16,13 +17,23 @@ function Header(){
 
     const router = useRouter();
 
+    const handleClick = (event) => {
+        event.preventDefault();
+        if (event.currentTarget.getAttribute('href') === router.pathname) {
+            setIsExpanded(!isExpanded);
+        } else {
+            setIsExpanded(false);
+            router.push(event.currentTarget.getAttribute('href'));
+        }
+    }
+
     return(
         <>
             <div className={`${style.main}`}>
-                <div className={`${style.header}`}>
-                    <a className={`${style.res}`} href="/">Home</a>
-                    <a className={`${style.res}`} href="/create">Make a task</a>
-                    <a className={`${style.res}`} href="/calendar">Calendar</a>
+                <div className={`${style.header} ${isExpanded ? style.expanded : ''}`}>
+                    <a className={`${style.res} ${router.pathname === '/' ? style.current : ''}`} href="/" onClick={handleClick}>Home</a>
+                    <a className={`${style.res} ${router.pathname === '/create' ? style.current : ''}`} href="/create" onClick={handleClick}>Make a task</a>
+                    <a className={`${style.res} ${router.pathname === '/calendar' ? style.current : ''}`} href="/calendar" onClick={handleClick}>Calendar</a>
                     {
                         isLogedIn ? <a className={`${style.res}`} onClick={() => {
                             deleteCookie('token');
