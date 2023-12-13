@@ -79,61 +79,21 @@ export default function Home() {
   };
 
   const login = (event: any) => {
-    axios
-      .post("/api/auth/login", {
-        username: event.target.username.value,
-        password: event.target.password.value,
-      })
-      .then((res) => {
-        console.log(res.data.data);
-        setCookie("token", res.data.data.token, {
-          maxAge: 30 * 24 * 60 * 60,
-          path: "/",
-        });
-        router.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        switch (err.response.data.success.cause) {
-          case "missing_parameters":
-            toast.error("Please fill out username and password!", {
-              position: "top-left",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              draggable: true,
-            });
-            break;
-          case "invalid_credentials":
-            toast.error("Invalid username!", {
-              position: "top-left",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              draggable: true,
-            });
-            break;
-          case "invalid_password":
-            toast.error("Invalid password!", {
-              position: "top-left",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              draggable: true,
-            });
-            break;
-          default:
-            toast.error("Something went wrong!", {
-              position: "top-left",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              draggable: true,
-            });
-            break;
-        }
+    axios.post("/api/auth/login", {
+      username: event.target.username.value,
+      password: event.target.password.value
+    }).then((res) => {
+      console.log(res.data.data); 
+      setCookie('token', res.data.data.token, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: '/',
       });
-  };
+    }
+    ).catch((err) => {
+      console.log(err); 
+    }
+    )
+  }
 
   const handleResetPassword = async (event: any) => {
     event.preventDefault();
@@ -256,5 +216,5 @@ export default function Home() {
         </ReactModal>
       </main>
     </>
-  )
+  );
 }
