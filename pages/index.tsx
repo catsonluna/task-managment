@@ -8,9 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <>
+    <><Header />
       <main className={`${styles.main}`}>
-        <Header />
+        
         Task Management!
         <div className={styles.description}>
           <div className={styles.description1}>
