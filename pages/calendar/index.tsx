@@ -21,12 +21,12 @@ export default function Home() {
     createdAt: "",
 
   }]);
-  const getNextMonth = (dueTillDate) => {
+  const getNextMonth = (dueTillDate: Date) => {
     const today = new Date();
-      if(today.getMonth() == 12){ //or maybe 12 not sure parbaudit  
-        if (dueTillMonth.getMonth() == 1){ // or 1 idk check
+      if(today.getMonth() == 11){ //or maybe 12 not sure parbaudit  
+        if (dueTillDate.getMonth() == 0){ // or 1 idk check
           return true
-        }else if(dueTillMonth.getMonth() == today.getMonth() + 1){
+        }else if(dueTillDate.getMonth() == today.getMonth() + 1){
           return true;
         }else{
           return false
@@ -88,7 +88,7 @@ export default function Home() {
                 {tasks.map((task) => {
                   const dueTillDate = new Date(task.dueTill);
                   const today = new Date();
-                  if (dueTillDate.getMonth() == today.getMonth() + 1) {
+                  if (getNextMonth(dueTillDate)) {
                     return (
                       <Task title={task.title} description={task.description} dueTill={task.dueTill} highPriority={task.highPriority} completed={task.completed} createdAt={task.createdAt} />
                     )
