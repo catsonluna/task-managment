@@ -61,16 +61,6 @@ export default function Home() {
         <div className={styles.description}>
             <form className={`${styles.form}`} onSubmit={handleSubmit}>
               <div className={`${styles.row}`}>
-                <div className={`${styles.fix}`}>{/*date*/}
-                    <div className={`${styles.calc}`}>
-                      <label className={`${styles.labelCal}`}>
-                        Date
-                        <Cal onChangeDate={(e) => {
-                          setDate(e);
-                        }} />
-                      </label>
-                    </div>
-                </div>
                 <div className={`${styles.formatting}`}>{/*viss parejais*/}
                     <label className={`${styles.label}`}>
                       Title
@@ -80,18 +70,30 @@ export default function Home() {
                       Description
                       <textarea className={`${styles.inputA}`} name={"description"} required ></textarea>
                     </label>
-                    <div className={`${styles.fixed}`}>
-                      <h1 className={`${styles.high}`}>High priority</h1>
-                      <label className={`${styles.toggle}`}>
-                        <input type="checkbox" className={`${styles.check}`} onChange={(e) => {
-                          setHighPriority(e.target.checked);
-                        }} />
-                        <span className={`${styles.slider}`}></span>
-                      </label>
+                    <div className={`${styles.fix}`}>{/*date*/}
+                      <div className={`${styles.calc}`}>
+                        <label className={`${styles.labelCal}`}>
+                          Date
+                          <Cal onChangeDate={(e) => {
+                            setDate(e);
+                          }} />
+                        </label>
+                      </div>
                     </div>
                 </div>
               </div>
-              <button type="submit" className={`${styles.button}`}>Submit</button>
+              <div className={`${styles.sas}`}>
+                <div className={`${styles.fixed}`}>
+                  <h1 className={`${styles.high}`}>High priority</h1>
+                  <label className={`${styles.toggle}`}>
+                    <input type="checkbox" className={`${styles.check}`} onChange={(e) => {
+                      setHighPriority(e.target.checked);
+                    }} />
+                    <span className={`${styles.slider}`}></span>
+                  </label>
+                </div>
+                <button type="submit" className={`${styles.button}`}>Submit</button>
+              </div>
             </form>
         </div>
       </main>
