@@ -17,6 +17,7 @@ function Task({title, description, dueTill, highPriority, completed, createdAt}:
             <div className={`${styles.date}`}>{/*date*/}
                 <h1>{dueTillDate.toLocaleString()}</h1>
             </div>
+            <button className={`${styles.completed}`}>mark as finished</button>
         </div>
     );
 }
