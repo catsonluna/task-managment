@@ -75,6 +75,12 @@ export default function Home() {
         <div className={`${styles.serch}`}>
           <input type="text" className={`${styles.search}`} placeholder='Search task' 
           value={search} onChange={(e) => setSearch(e.target.value)} 
+          onKeyDown={(e) => {
+            if(e.key == "Enter"){
+              router.push(`/task/${search}`);
+            }
+          }
+          }
           ></input>
           <button className={`${styles.but}`} onClick={() => {
             router.push(`/task/${search}`);

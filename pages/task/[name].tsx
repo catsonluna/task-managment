@@ -44,7 +44,7 @@ export default function Home() {
 
   }, [name])
 
-  const [tasks, setTasks] = useState({
+  const [tasks, setTasks] = useState([{
     title: "",
     description: "",
     dueTill: "",
@@ -52,12 +52,22 @@ export default function Home() {
     completed: false,
     createdAt: "",
 
-  });
+  }]);
+  if(tasks == null || tasks[0] == null){
+    return <>
+      <main className={`${styles.main}`}>
+      <h1>
+        Task not found
+      </h1>
+      <button onClick={() => router.push("/calendar")}>Go back</button>
+    </main>
+      </>
 
-  if(tasks.title == ""){ 
-    return <div>loading...</div>
   }
 
+  if(tasks[0].title == ""){ 
+    return <div>loading...</div>
+  }
   return (
     <>
       <Head>
@@ -66,33 +76,42 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main}`}>
+        <main className={`${styles.main}`}>
         <Header />
-        <div className={styles.description}>
-        <div className={styles.description1}>
+        <div className={`${styles.grid}`}>
+          {tasks.map((task) => { 
+                    return(  <>
+                            <div className={styles.description}>
+
+                            <div className={styles.description1}>
+
           <h1 className={`${styles.title}`}>
-            {tasks.title}
+            {task.title}
           </h1>
 
           <h2 className={`${styles.desc}`}>
-            {tasks.description}
+            {task.description}
           </h2>
 
           <h2 className={`${styles.desc1}`}>
-            started at:{dateFormat(tasks.createdAt)}
+            started at:{dateFormat(task.createdAt)}
           </h2>
 
           <h2 className={`${styles.desc1}`}>
-            due till:{dateFormat(tasks.dueTill)}
+            due till:{dateFormat(task.dueTill)}
           </h2>
 
           <h2 className={`${styles.desc1}`}>
-            high priority:{tasks.highPriority ? "yes" : "no"}
+            high priority:{task.highPriority ? "yes" : "no"}
           </h2>
+          </div>
+          </div>
+          </>
+                    )
+          })}
+          </div>
 
  
-          </div>
-        </div>
       </main>
     </>
   )
