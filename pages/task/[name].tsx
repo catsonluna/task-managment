@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import styles from '@/styles/task.module.css'
 import Header from '../components/header'
 import { useEffect, useState } from 'react'
 import { getCookie } from 'cookies-next'
@@ -70,23 +70,23 @@ export default function Home() {
         <Header />
         <div className={styles.description}>
         <div className={styles.description1}>
-          <h1>
+          <h1 className={`${styles.title}`}>
             {tasks.title}
           </h1>
 
-          <h2>
+          <h2 className={`${styles.desc}`}>
             {tasks.description}
           </h2>
 
-          <h2>
+          <h2 className={`${styles.desc1}`}>
             started at:{dateFormat(tasks.createdAt)}
           </h2>
 
-          <h2>
+          <h2 className={`${styles.desc1}`}>
             due till:{dateFormat(tasks.dueTill)}
           </h2>
 
-          <h2>
+          <h2 className={`${styles.desc1}`}>
             high priority:{tasks.highPriority ? "yes" : "no"}
           </h2>
 
