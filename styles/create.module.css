@@ -232,14 +232,18 @@
 
 }
 @media only screen and (max-width: 900px){
+    .input{
+        height: 70%;
+    }
     .row{
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-top: 40px;
+        width: 100%;
     }
     .description{
         margin-top: 15px;
+        width: 90%;
         height: 85%;
     }
     .formatting{
@@ -251,7 +255,7 @@
     }
     .calc{
         align-items: flex-end;
-        width: 50%;
+        width: 100%;
         margin-right: 0px;
     }
     .fix{
@@ -264,6 +268,7 @@
         width: 100%;
         align-items: center;
         justify-content: center;
+        gap: 10px;
     }
     .button{
         width: 40%;
@@ -276,8 +281,8 @@
         padding: 10px;
     }
     .labelA{
-        width: 80%;
-        height: 26%;
+        width: 100%;
+        height: 70%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -291,6 +296,8 @@
     }
     .form{
         gap: 15px;
+        width: 100%;
+        height: 100%;
     }
     .sas{
         flex-direction: column;
