@@ -14,14 +14,6 @@ export function getPrisma() {
     return connect();
 }
 
-export function dateFormat(date: string) {
-    const dateObj = new Date(date);
-    const year = dateObj.getFullYear();
-    const month = dateObj.getMonth() + 1;
-    const day = dateObj.getDate();
-    return `${day}/${month}/${year}`;
-}
-
 export function shaHash(str: string) {
     const crypto = require("crypto");
     const hash = crypto.createHash("sha256");
