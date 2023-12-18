@@ -29,6 +29,8 @@ export default function Home() {
     createdAt: "",
 
   }]);
+
+  const [search, setSearch] = useState("");
   const getNextMonth = (dueTillDate: Date) => {
     const today = new Date();
       if(today.getMonth() == 11){ //or maybe 12 not sure parbaudit  
@@ -71,8 +73,13 @@ export default function Home() {
       <main className={`${styles.main}`}>
         <Header />
         <div className={`${styles.serch}`}>
-          <input type="text" className={`${styles.search}`} placeholder='Search task'></input>
-          <button className={`${styles.but}`}>Find</button>
+          <input type="text" className={`${styles.search}`} placeholder='Search task' 
+          value={search} onChange={(e) => setSearch(e.target.value)} 
+          ></input>
+          <button className={`${styles.but}`} onClick={() => {
+            router.push(`/task/${search}`);
+
+          }}>Find</button>
         </div>
         <div className={styles.description}>
             <div className={`${styles.req}`}>{/*this month*/}
