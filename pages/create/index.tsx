@@ -9,6 +9,9 @@ import Moment from 'moment';
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -44,6 +47,25 @@ export default function Home() {
     }
     ).catch((err) => {
       console.log(err);
+      switch (err.response.data.cause) {
+        case "name_required" || "description_required" || "dueDate_required":
+          toast.error("Please fill out all fields!", {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            draggable: true,
+          });
+          break;
+          default:
+            toast.error("Something went wrong!", {
+              position: "top-left",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              draggable: true,
+            });
+      }
     }
     )
 };
@@ -58,17 +80,20 @@ export default function Home() {
       </Head>
       <main className={`${styles.main}`}>
         <Header />
+        <ToastContainer />
         <div className={styles.description}>
-            <form className={`${styles.form}`} onSubmit={handleSubmit}>
+            <form className={`${styles.form}`} onSubmit={handleSubmit} onError={() => {
+              console.log("error");
+            }}>
               <div className={`${styles.row}`}>
                 <div className={`${styles.formatting}`}>{/*viss parejais*/}
                     <label className={`${styles.label}`}>
                       Title
-                      <input type="text" className={`${styles.input}`} name={"title"} required/>
+                      <input type="text" className={`${styles.input}`} name={"title"}/>
                     </label>
                     <label className={`${styles.labelA}`}>
                       Description
-                      <textarea className={`${styles.inputA}`} name={"description"} required ></textarea>
+                      <textarea className={`${styles.inputA}`} name={"description"} ></textarea>
                     </label>
                     <div className={`${styles.fix}`}>{/*date*/}
                       <div className={`${styles.calc}`}>
