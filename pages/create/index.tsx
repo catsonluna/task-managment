@@ -48,8 +48,8 @@ export default function Home() {
     ).catch((err) => {
       console.log(err);
       switch (err.response.data.cause) {
-        case "name_required" || "description_required" || "dueDate_required":
-          toast.error("Please fill out all fields!", {
+        case "name_required":
+          toast.error("Please fill out the tittle!", {
             position: "top-left",
             autoClose: 5000,
             hideProgressBar: false,
@@ -57,6 +57,15 @@ export default function Home() {
             draggable: true,
           });
           break;
+          case "description_required":
+            toast.error("Please fill out the description!", {
+              position: "top-left",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              draggable: true,
+            });
+            break
           default:
             toast.error("Something went wrong!", {
               position: "top-left",
