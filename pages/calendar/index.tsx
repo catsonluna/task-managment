@@ -70,6 +70,10 @@ export default function Home() {
       </Head>
       <main className={`${styles.main}`}>
         <Header />
+        <div className={`${styles.serch}`}>
+          <input type="text" className={`${styles.search}`} placeholder='Search task'></input>
+          <button className={`${styles.but}`}>Find</button>
+        </div>
         <div className={styles.description}>
             <div className={`${styles.req}`}>{/*this month*/}
                 <h1 className={`${styles.h1}`}>This month</h1>
@@ -85,8 +89,6 @@ export default function Home() {
                     )
                   }
                 })}
-
-
                 </div>
             </div>
             <div className={`${styles.req}`}>{/*next month*/}

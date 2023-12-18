@@ -3,6 +3,33 @@
     width: 100vw;
     height: 100vh;
     flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.serch{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-direction: row;
+}
+.but{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 8px;
+  background: white;
+  border-radius: 30px;
+  border: none;
+  color: #55A6F1;
+  font-size: large;
+  font-weight: bold;
+  transition: text-shadow 0.3s ease, box-shadow 0.3s ease;
+}
+.but:hover{
+  text-shadow: 2px 2px black;
+  box-shadow: 2px 2px black;
 }
 .description{
     display: flex;
@@ -83,6 +110,16 @@
     gap: 10px;
     width: 100%;
     overflow-y: auto;
+}
+.search{
+  display: flex;
+  background-color: white;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  color: #55A6F1;
+  border-radius: 15px;
+  padding: 10px;
 }
 .tasks1{
     display: flex;
