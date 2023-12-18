@@ -32,12 +32,14 @@ export default async function handler(
         });
     }
 
-    const task = await prisma.task.findFirst({
+    const task = await prisma.task.findMany({
         where: {
-            title: task_name as string,
-
-            user_id: session.user_id    
-        }
+            user_id: session.user_id,
+            title: {
+                contains: task_name as string
+            }
+        },
+        
     });
 
 
