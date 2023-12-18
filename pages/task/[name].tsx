@@ -53,11 +53,21 @@ export default function Home() {
     createdAt: "",
 
   });
+  if(tasks == null || tasks.title == null){
+    return <>
+      <main className={`${styles.main}`}>
+      <h1>
+        Task not found
+      </h1>
+      <button onClick={() => router.push("/calendar")}>Go back</button>
+    </main>
+      </>
+
+  }
 
   if(tasks.title == ""){ 
     return <div>loading...</div>
   }
-
   return (
     <>
       <Head>
