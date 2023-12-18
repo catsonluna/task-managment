@@ -25,7 +25,11 @@
 }
 @media only screen and (max-width: 900px){
   .cal{
-    width: 43vw;
+    width: 90%;
+    height: 80%;
+  }
+  .calWrapper{
+    height: 100%;
   }
   .main{
     align-items: center;
