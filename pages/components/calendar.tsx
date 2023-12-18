@@ -15,7 +15,7 @@ function Cal({onChangeDate}: {onChangeDate: (date: Moment.Moment) => void}) {
 
   return (
     <div className={styles.main}>
-      <div className={styles.calWrapper}>
+      <div className={`${styles.calWrapper}`}>
         <DateTime 
           value={dateTime} 
           onChange={(e) => {
